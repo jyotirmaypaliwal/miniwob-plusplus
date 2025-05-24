@@ -42,6 +42,8 @@ def get_screenshot(
         orig_icc = ImageCms.ImageCmsProfile(BytesIO(icc_profile))
         srgb_icc = ImageCms.createProfile("sRGB")
         pil_image = ImageCms.profileToProfile(pil_image, orig_icc, srgb_icc)
+    if pil_image is None:
+        raise ValueError("profileToProfile returned None unexpectedly")
     return pil_image
 
 
